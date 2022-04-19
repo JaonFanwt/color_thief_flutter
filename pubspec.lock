@@ -87,7 +87,7 @@ packages:
       path: "."
       ref: df0edad
       resolved-ref: df0edad36410d6f8c16ae51998092c6cd4d169bb
-      url: "git://github.com/JaonFanwt/quantize_dart.git"
+      url: "https://github.com/JaonFanwt/quantize_dart.git"
     source: git
     version: "1.0.3"
   sky_engine:
