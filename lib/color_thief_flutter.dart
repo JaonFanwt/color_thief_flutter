@@ -96,7 +96,7 @@ Future<List<List<int>>?> getPaletteFromBytes(
 ///
 /// `quality` - Between 1 and 10. There is a trade-off between quality and speed. The bigger the number, the faster the palette generation but the greater the likelihood that colors will be missed.
 Future<List<List<int>>?> getPaletteFromImage(Image image,
-    [int? colorCount, int quality = 10]) async {
+    [int? colorCount, int quality = 10, int? width, int? height,]) async {
   final options = _validateOptions(colorCount, quality);
   colorCount = options[0];
   quality = options[1];
@@ -105,7 +105,7 @@ Future<List<List<int>>?> getPaletteFromImage(Image image,
       .toByteData(format: ImageByteFormat.rawRgba)
       .then((val) => Uint8List.view((val!.buffer)));
   return getPaletteFromBytes(
-      imageData, image.width, image.height, colorCount, quality);
+      imageData, width ?? image.width, height ?? image.height, colorCount, quality);
 }
 
 /// returns a list that contains the reduced color palette, represented as [[R,G,B]]
@@ -127,8 +127,8 @@ Future<List<List<int>>?> getPaletteFromUrl(String url,
 /// `image` - Image
 ///
 /// `quality` - Between 1 and 10. There is a trade-off between quality and speed. The bigger the number, the faster the palette generation but the greater the likelihood that colors will be missed.
-Future<List<int>?> getColorFromImage(Image image, [int quality = 10]) async {
-  final palette = await getPaletteFromImage(image, 5, quality);
+Future<List<int>?> getColorFromImage(Image image, [int quality = 10, int? width, int? height]) async {
+  final palette = await getPaletteFromImage(image, 5, quality, width, height);
   if (palette == null) {
     return null;
   }
